@@ -1,6 +1,7 @@
 import sys
 from os.path import dirname, abspath
 
+
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
 import asyncio
@@ -10,8 +11,10 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 from app.config import database_url
-from app.database import Base
+from app.dao.database import Base
 from app.auth.models import Role, User
+from app.api.models import CurrencyRate
+
 
 config = context.config
 config.set_main_option("sqlalchemy.url", database_url)

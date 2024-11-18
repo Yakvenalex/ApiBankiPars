@@ -109,7 +109,9 @@ class DatabaseSessionManager:
 session_manager = DatabaseSessionManager(async_session_maker)
 
 # Зависимости FastAPI для использования сессий
+# без коммита
 SessionDep = session_manager.session_dependency
+# с коммитом
 TransactionSessionDep = session_manager.transaction_session_dependency
 
 # Пример использования декоратора
