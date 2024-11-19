@@ -4,17 +4,17 @@ from pydantic import BaseModel, ConfigDict
 
 
 class BankNameSchema(BaseModel):
-    bank_en: str  # Название банка на английском
+    bank_en: str
 
 
 class CurrencyRateSchema(BankNameSchema):
-    bank_name: str  # Название банка на русском
-    link: str  # Ссылка на страницу с курсами валют
-    usd_buy: float  # Курс покупки USD
-    usd_sell: float  # Курс продажи USD
-    eur_buy: float  # Курс покупки EUR
-    eur_sell: float  # Курс продажи EUR
-    update_time: str  # Время последнего обновления
+    bank_name: str
+    link: str
+    usd_buy: float
+    usd_sell: float
+    eur_buy: float
+    eur_sell: float
+    update_time: str
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -37,3 +37,8 @@ class CurrencySaleRangeFilterSchema(BaseModel):
     usd_sale_max: float | None = 0
     eur_sale_min: float | None = 0
     eur_sale_max: float | None = 0
+
+
+class BestRateResponse(BaseModel):
+    rate: float
+    banks: list[str]
