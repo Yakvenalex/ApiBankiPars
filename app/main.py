@@ -16,13 +16,13 @@ scheduler = AsyncIOScheduler()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
-    Manages the lifecycle of the application scheduler
+    Управляет жизненным циклом планировщика приложения
 
     Args:
-        app (FastAPI): FastAPI application instance
+        app (FastAPI): Экземпляр приложения FastAPI
     """
     try:
-        # Start scheduler before application startup
+        # Настройка и запуск планировщика
         scheduler.add_job(
             upd_data_to_db,
             trigger=IntervalTrigger(minutes=10),
@@ -30,14 +30,14 @@ async def lifespan(app: FastAPI):
             replace_existing=True
         )
         scheduler.start()
-        logger.info("Currency rate update scheduler started")
+        logger.info("Планировщик обновления курсов валют запущен")
         yield
     except Exception as e:
-        logger.error(f"Scheduler initialization error: {e}")
+        logger.error(f"Ошибка инициализации планировщика: {e}")
     finally:
-        # Shutdown scheduler during application shutdown
+        # Завершение работы планировщика
         scheduler.shutdown()
-        logger.info("Currency rate update scheduler stopped")
+        logger.info("Планировщик обновления курсов валют остановлен")
 
 
 app = FastAPI(lifespan=lifespan)
