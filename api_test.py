@@ -92,7 +92,7 @@ async def get_all_currency(access_token: str, method_name='all_currency'):
 
 rez = run(get_all_currency(access_token=USER_TOKEN, method_name='all_currency_admin'))
 print(rez)
-=======
+
 from typing import Tuple
 
 from fastapi import HTTPException
